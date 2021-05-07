@@ -69,6 +69,7 @@ ll modulo(ll x, ll m)
 
 int dfs(vector<vector<bool>> &change, vector<string> &arr, int i, int j, int k)
 {
+    int x = 0;
     return 0;
 }
 
@@ -91,6 +92,7 @@ void run()
     }
 
     cout << "YES\n";
+    return;
 }
 
 int main()
