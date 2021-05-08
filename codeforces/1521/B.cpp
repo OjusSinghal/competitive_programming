@@ -75,40 +75,43 @@ int dfs(vector<vector<bool>> &change, vector<string> &arr, int i, int j, int k)
 
 void run()
 {
-    int n, t;
-    cin >> n >> t;
+    int n; //, x; 
+    cin >> n; // >> x;
 
+    vi arr(n);
+    REP(i, 0, n) { cin >> arr[i]; }
 
-    REP(i, 0, t)
+    if (n == 1) { cout << 0 << "\n"; return; }
+    if (n == 2)
     {
-        int k; 
-        cin >> k;
+        cout << 1 << "\n";
+        cout << 1 << " " << 2 << " ";
+        int m = min(arr[0], arr[1]);
+        cout << m << " " << (2 * m) - 1 << "\n"; 
+        return;
+    }
 
-        int lo = 1, hi = n;
+    cout << n - 2 << "\n";
 
-        while (lo < hi)
+    REP(i, 1, n - 1)
+    {
+        int m = min(arr[i], arr[i + 1]);
+        arr[i + 1] = m;
+        int maxi = max(arr[i - 1], arr[i + 1]);
+        while(true)
         {
-            // cout << "lo: " << lo << " hi: " << hi << endl;
-            cout << "? " << lo << " " << (hi + lo) / 2 << endl;
-            cout.flush();
-
-            int x; cin >> x;
-            x = ((hi + lo) / 2) - lo + 1 - x;
-            if (x < k)
-            {
-                lo = ((hi + lo) / 2) + 1;
-                k -= x;
-            }
-            else
-            {
-                hi = ((hi + lo) / 2);
-            }
+            maxi++;
+            if (gcd(arr[i - 1], maxi) == 1 && 
+                gcd(maxi, arr[i + 1]) == 1) break;
         }
 
-        // cout << "lo: " << lo << " hi: " << hi << endl;
-        cout << "! " << lo << endl;
-        cout.flush();
+        arr[i] = maxi;
+
+        cout << i + 1 << " " << i + 2 << " ";
+        cout << arr[i] << " " << arr[i + 1] << "\n";
+
     }
+
 }
 
 int main()
@@ -117,7 +120,7 @@ int main()
     ios_base::sync_with_stdio(false);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
 
     REP(i, 0, t) { run(); }
 }
