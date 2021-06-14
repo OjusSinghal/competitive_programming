@@ -51,7 +51,8 @@ string next_valid_bracket_sequence(const string &x)
                 s = s.substr(0, i + 1);
                 REP(j, 0, (n - i - d) / 2) { s += "("; }
                 REP(j, 0, (n - i + d - 2) / 2) { s += ")"; }
-                if (s.size() < n) return s + ")";
+                if (s.size() < n)
+                    return s + ")";
                 return s;
             }
         }
@@ -60,34 +61,36 @@ string next_valid_bracket_sequence(const string &x)
     return "";
 }
 
-ll modulo(ll x, ll m) 
+ll modulo(ll x, ll m)
 {
     int r = x % m;
     return r < 0 ? r + m : r;
 }
-
 
 int dfs(vector<vector<bool>> &change, vector<string> &arr, int i, int j, int k)
 {
     return 0;
 }
 
-
 void run()
 {
-    int n; //, x; 
+    int n;
     cin >> n; // >> x;
 
     vi arr(n);
     REP(i, 0, n) { cin >> arr[i]; }
 
-    if (n == 1) { cout << 0 << "\n"; return; }
+    if (n == 1)
+    {
+        cout << 0 << "\n";
+        return;
+    }
     if (n == 2)
     {
         cout << 1 << "\n";
         cout << 1 << " " << 2 << " ";
         int m = min(arr[0], arr[1]);
-        cout << m << " " << (2 * m) - 1 << "\n"; 
+        cout << m << " " << (2 * m) - 1 << "\n";
         return;
     }
 
@@ -98,20 +101,19 @@ void run()
         int m = min(arr[i], arr[i + 1]);
         arr[i + 1] = m;
         int maxi = max(arr[i - 1], arr[i + 1]);
-        while(true)
+        while (true)
         {
             maxi++;
-            if (gcd(arr[i - 1], maxi) == 1 && 
-                gcd(maxi, arr[i + 1]) == 1) break;
+            if (gcd(arr[i - 1], maxi) == 1 &&
+                gcd(maxi, arr[i + 1]) == 1)
+                break;
         }
 
         arr[i] = maxi;
 
         cout << i + 1 << " " << i + 2 << " ";
         cout << arr[i] << " " << arr[i + 1] << "\n";
-
     }
-
 }
 
 int main()
