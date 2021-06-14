@@ -51,7 +51,8 @@ string next_valid_bracket_sequence(const string &x)
                 s = s.substr(0, i + 1);
                 REP(j, 0, (n - i - d) / 2) { s += "("; }
                 REP(j, 0, (n - i + d - 2) / 2) { s += ")"; }
-                if (s.size() < n) return s + ")";
+                if (s.size() < n)
+                    return s + ")";
                 return s;
             }
         }
@@ -60,12 +61,11 @@ string next_valid_bracket_sequence(const string &x)
     return "";
 }
 
-ll modulo(ll x, ll m) 
+ll modulo(ll x, ll m)
 {
     int r = x % m;
     return r < 0 ? r + m : r;
 }
-
 
 int dfs(vector<vector<bool>> &change, vector<string> &arr, int i, int j, int k)
 {
@@ -73,21 +73,26 @@ int dfs(vector<vector<bool>> &change, vector<string> &arr, int i, int j, int k)
     return 0;
 }
 
-
 void run()
 {
-    int n; //, x; 
-    cin >> n; // >> x;
+    int n;
+    cin >> n;
 
-    string s; cin >> s;
+    string s;
+    cin >> s;
 
     vector<bool> arr(26);
     arr[s[0] - 'A'] = true;
 
     REP(i, 1, n)
     {
-        if (s[i] == s[i - 1]) continue;
-        if (arr[s[i] - 'A']) { cout << "NO\n"; return; }
+        if (s[i] == s[i - 1])
+            continue;
+        if (arr[s[i] - 'A'])
+        {
+            cout << "NO\n";
+            return;
+        }
         arr[s[i] - 'A'] = true;
     }
 
