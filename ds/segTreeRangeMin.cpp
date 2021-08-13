@@ -1,3 +1,6 @@
+// BUILD TREE FROM ARRAY, UPDATE SINGLE ENTRY, QUERY RANGE MINIMUM
+
+
 #include <algorithm>
 #include <bitset>
 #include <cmath>
@@ -39,17 +42,17 @@ void build(const vi &arr, vi &tree, int lo, int hi, int i)
     int mid = (lo + hi) / 2;
     build(arr, tree, lo, mid, (2 * i) + 1);
     build(arr, tree, mid + 1, hi, (2 * i) + 2);
-    tree[i] = max(tree[(2 * i) + 2], tree[(2 * i) + 1]);
+    tree[i] = min(tree[(2 * i) + 2], tree[(2 * i) + 1]);
 }
 
-int maxi(vi &tree, int lo, int hi, int l, int r, int i)
+int mini(vi &tree, int lo, int hi, int l, int r, int i)
 {
     if (lo >= l && hi <= r)
         return tree[i];
     if (hi < l || lo > r)
-        return INT32_MIN;
+        return INT32_MAX;
     int mid = (lo + hi) / 2;
-    return max(maxi(tree, lo, mid, l, r, 2 * i + 1), maxi(tree, mid + 1, hi, l, r, 2 * i + 2));
+    return min(mini(tree, lo, mid, l, r, 2 * i + 1), mini(tree, mid + 1, hi, l, r, 2 * i + 2));
 }
 
 void update(vi &tree, int u, int val, int lo, int hi, int i)
@@ -64,7 +67,7 @@ void update(vi &tree, int u, int val, int lo, int hi, int i)
         update(tree, u, val, lo, mid, 2 * i + 1);
     else
         update(tree, u, val, mid + 1, hi, 2 * i + 2);
-    tree[i] = max(tree[(2 * i) + 2], tree[(2 * i) + 1]);
+    tree[i] = min(tree[(2 * i) + 2], tree[(2 * i) + 1]);
 }
 
 void run()
