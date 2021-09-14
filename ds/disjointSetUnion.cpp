@@ -39,15 +39,13 @@ typedef pair<int, int> pii;
 #define S second
 #define sq(a) ((a) * (a))
 
-class disjointSetUnion
-{
+class disjointSetUnion {
 private:
     vi links, setSize;
     int n;
 
 public:
-    disjointSetUnion(int n)
-    {
+    disjointSetUnion(int n) {
         this->links = vi(n);
         this->setSize = vi(n, 1);
         this->n = n;
@@ -58,6 +56,7 @@ public:
     void merge(int u, int v)
     {
         int up = find(u), vp = find(v);
+        if (up == vp) return;
         if (setSize[up] >= setSize[vp]) {
             links[vp] = up;
             setSize[vp] += setSize[up];
@@ -78,8 +77,7 @@ public:
 
 private:
     int find(int u) {
-        while (links[u] != u) u = links[u];
-        return u;
+        return links[u] = (links[u] == u) ? u : find(links[u]);
     }
 };
 
