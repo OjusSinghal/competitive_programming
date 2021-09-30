@@ -206,7 +206,8 @@ public:
     ll get(int i, int j) { return perm[i][j]; }
 };
 
-// returns list of primes
+// returns list of primes upto n (inclusive)
+// 32 times more memory than lognSieve
 vector<int> linearSieve(int n)
 {
     vi prime, lp(n + 1, 0);
@@ -240,6 +241,16 @@ vector<bool> lognSieve(int n) {
     }
 
     return composite;
+}
+
+// pair.first = quotient
+// pair.second = number of times this quotient appears
+vector<pair<int, int>> allQuotients(int n)
+{
+    v(pii) Q;
+    for (int i = 2; i <= n; i = (n / (n / i)) + 1)
+        Q.PB({n / i, (n / (n / i)) - i + 1});
+    return Q;
 }
 
 void run()
