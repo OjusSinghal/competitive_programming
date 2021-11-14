@@ -10,10 +10,13 @@
 #include <set>
 #include <sstream>
 #include <stack>
+#include <stdlib.h>
+#include <time.h>
 #include <unordered_map>
 #include <utility>
 #include <vector>
 #include <iomanip>
+#include <climits>
 
 using namespace std;
 
@@ -31,6 +34,15 @@ typedef pair<int, int> pii;
 #define S second
 #define sq(a) ((a) * (a))
 
+// DEFAULT IMPLEMENTATION IN INT
+// CHANGE ALL RETURN TYPES, "MINIMUM" VARIABLE, AND ARRAY TYPES IN ARGUMENT
+// TO CONVERT TO SOMETHING OTHER THAN INT
+const int MINIMUM = INT32_MIN;
+
+// assuming arr is of size n,
+// initial call with i = 0
+// [lo, hi] (included, typically [0, n - 1])
+// tree of size 4 * size of arr
 void build(const vi &arr, vi &tree, int lo, int hi, int i)
 {
     if (hi == lo)
@@ -44,16 +56,23 @@ void build(const vi &arr, vi &tree, int lo, int hi, int i)
     tree[i] = max(tree[(2 * i) + 2], tree[(2 * i) + 1]);
 }
 
+// initial call with i = 0
+// [lo, hi] (included, typically [0, n - 1])
+// [l, r] - inclusive of l and r
+// CHANGE RETURN TYPE IF LONG LONG OR SOMETHING ELSE
 int maxi(vi &tree, int lo, int hi, int l, int r, int i)
 {
     if (lo >= l && hi <= r)
         return tree[i];
     if (hi < l || lo > r)
-        return INT32_MIN;
+        return MINIMUM;
     int mid = (lo + hi) / 2;
     return max(maxi(tree, lo, mid, l, r, 2 * i + 1), maxi(tree, mid + 1, hi, l, r, 2 * i + 2));
 }
 
+// initial call with i = 0
+// [lo, hi] (included, typically [0, n - 1])
+// CHANGE TYPE OF VAL IF LONG LONG OR SOMETHING ELSE
 void update(vi &tree, int u, int val, int lo, int hi, int i)
 {
     if (lo == hi)
