@@ -59,11 +59,11 @@ public:
         if (up == vp) return;
         if (setSize[up] >= setSize[vp]) {
             links[vp] = up;
-            setSize[vp] += setSize[up];
+            setSize[up] += setSize[vp];
         }
         else {
             links[up] = vp;
-            setSize[up] += setSize[vp];
+            setSize[vp] += setSize[up];
         }
     }
 
@@ -75,7 +75,7 @@ public:
         return find(u) == find(v);
     }
 
-private:
+    // private:
     int find(int u) {
         return links[u] = (links[u] == u) ? u : find(links[u]);
     }
