@@ -45,6 +45,11 @@ typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_
 #define v(t) vector<t>
 #define all(v) v.begin(), v.end()
 
+// // //
+// To erase from multiset defined by using the comparator less_equal<int>,
+// do -> pb.erase(pb.find_by_order(pb.order_of_key(val)));
+// // //
+
 void run()
 {
     pbds A; // declaration
