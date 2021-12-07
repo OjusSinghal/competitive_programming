@@ -64,14 +64,15 @@ void updateRange(vi &lazy, vi &tree, int lo, int hi, int l, int r, int i, int ad
     }
 }
 
-int mini(vi &tree, int lo, int hi, int l, int r, int i)
+int mini(vi &lazy, vi &tree, int lo, int hi, int l, int r, int i)
 {
     if (lo >= l && hi <= r)
         return tree[i];
     if (hi < l || lo > r)
         return INT32_MAX;
+    pushLazy(lazy, tree, i);
     int mid = (lo + hi) / 2;
-    return min(mini(tree, lo, mid, l, r, 2 * i + 1), mini(tree, mid + 1, hi, l, r, 2 * i + 2));
+    return min(mini(lazy, tree, lo, mid, l, r, 2 * i + 1), mini(lazy, tree, mid + 1, hi, l, r, 2 * i + 2));
 }
 
 void run()
