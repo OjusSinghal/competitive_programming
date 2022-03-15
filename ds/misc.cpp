@@ -106,6 +106,15 @@ ll power(ll n, ll k)
     return ans;
 }
 
+ll inverse(ll n, ll mod) {
+	return power(n, mod - 2, mod);
+}
+
+ll moduloDivide(ll a, ll b, ll mod) {
+	ll temp = (inverse(a, mod) * b) % mod;
+	return inverse(temp, mod);
+}
+
 int number_of_divisors(int n)
 {
     int count = 1;
