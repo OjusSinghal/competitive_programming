@@ -71,36 +71,29 @@ string next_valid_bracket_sequence(const string &x)
 
 ll modulo(ll x, ll m)
 {
-    int r = x % m;
+    ll r = x % m;
     return r < 0 ? r + m : r;
 }
 
-ll power(ll n, ll k, ll mod)
+ll power(ll n, ll k)
 {
-    if (k == 0)
-        return 1LL;
-    n %= mod;
+    if (k == 0) return 1LL;
     ll ans = 1;
-    while (k > 0)
-    {
-        if (k & 1)
-            ans = (ans * n) % mod;
-        n = (n * n) % mod;
+    while (k > 0) {
+        if (k & 1) ans *= n;
+        n *= n;
         k /= 2;
     }
     return ans;
 }
 
-ll power(ll n, ll k)
-{
-    if (k == 0)
-        return 1LL;
+ll power(ll n, ll k, ll mod) {
+    if (k == 0) return 1LL;
+    n %= mod;
     ll ans = 1;
-    while (k > 0)
-    {
-        if (k & 1)
-            ans *= n;
-        n *= n;
+    while (k > 0) {
+        if (k & 1) ans = (ans * n) % mod;
+        n = (n * n) % mod;
         k /= 2;
     }
     return ans;
