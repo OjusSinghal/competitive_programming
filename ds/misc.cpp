@@ -1,19 +1,4 @@
-#include <algorithm>
-#include <bitset>
-#include <cmath>
-#include <cstring>
-#include <iostream>
-#include <limits>
-#include <queue>
-#include <set>
-#include <sstream>
-#include <stack>
-#include <stdlib.h>
-#include <time.h>
-#include <unordered_map>
-#include <utility>
-#include <vector>
-#include <iomanip>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -143,7 +128,9 @@ ll moduloDivide(ll a, ll b, ll mod) {
 	return inverse(temp, mod);
 }
 
-int number_of_divisors(int n)
+
+// number of divisors of n
+int numberOfDivisors(int n)
 {
     int count = 1;
     vi arr;

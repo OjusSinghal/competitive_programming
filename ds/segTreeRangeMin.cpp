@@ -1,20 +1,7 @@
 // BUILD TREE FROM ARRAY, UPDATE SINGLE ENTRY, QUERY RANGE MINIMUM
 
 
-#include <algorithm>
-#include <bitset>
-#include <cmath>
-#include <cstring>
-#include <iostream>
-#include <limits>
-#include <queue>
-#include <set>
-#include <sstream>
-#include <stack>
-#include <unordered_map>
-#include <utility>
-#include <vector>
-#include <iomanip>
+#include <bits/stdc++.h>
 
 using namespace std;
 

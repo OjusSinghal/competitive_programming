@@ -1,20 +1,4 @@
-#include <algorithm>
-#include <bitset>
-#include <cmath>
-#include <cstring>
-#include <iostream>
-#include <limits>
-#include <queue>
-#include <set>
-#include <sstream>
-#include <stack>
-#include <stdlib.h>
-#include <time.h>
-#include <unordered_map>
-#include <utility>
-#include <vector>
-#include <iomanip>
-#include <climits>
+#include <bits/stdc++.h>
 
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>

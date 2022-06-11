@@ -6,25 +6,7 @@
 // main function TLEs in the CSES problem Forests 2
 // // //
 
-#include <algorithm>
-#include <bitset>
-#include <cmath>
-#include <cstring>
-#include <iostream>
-#include <limits>
-#include <queue>
-#include <set>
-#include <sstream>
-#include <stack>
-#include <stdlib.h>
-#include <time.h>
-#include <map>
-#include <unordered_map>
-#include <unordered_set>
-#include <utility>
-#include <vector>
-#include <iomanip>
-#include <climits>
+#include <bits/stdc++.h>
 
 using namespace std;
 

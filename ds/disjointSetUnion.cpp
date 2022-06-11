@@ -8,20 +8,7 @@
 //      -> SIZE (U) [SIZE OF THE SET CONTAINING U]
 //      -> SAME (U, V) [WHEATHER U, V BELONG TO THE SAME SET]
 
-#include <algorithm>
-#include <bitset>
-#include <cmath>
-#include <cstring>
-#include <iostream>
-#include <limits>
-#include <queue>
-#include <set>
-#include <sstream>
-#include <stack>
-#include <unordered_map>
-#include <utility>
-#include <vector>
-#include <iomanip>
+#include <bits/stdc++.h>
 
 using namespace std;
 
