@@ -154,7 +154,6 @@ ll nchoosek(ll n, ll k, ll mod)
     res = power(res, mod - 2, mod) % mod;
     for (ll i = n; i >= n - k + 1; i--)
         res = (res * i) % mod;
-
     return res;
 }
 
@@ -213,16 +212,13 @@ public:
 vector<int> linearSieve(int n)
 {
     vi prime, lp(n + 1, 0);
-    for (ll i = 2; i < n + 1; i++)
-    {
-        if (lp[i] == 0)
-        {
+    for (ll i = 2; i < n + 1; i++) {
+        if (lp[i] == 0) {
             prime.PB(i);
             lp[i] = i;
         }
 
-        for (int j = 0; j < prime.size() && i * prime[j] < n + 1 && prime[j] <= lp[i]; j++)
-        {
+        for (int j = 0; j < prime.size() && i * prime[j] < n + 1 && prime[j] <= lp[i]; j++) {
             lp[i * prime[j]] = prime[j];
         }
     }
@@ -231,17 +227,13 @@ vector<int> linearSieve(int n)
 
 // vector<bool> takes 1/32 times the memory of vector<int>
 // returns boolean array of all numbers, ar[i] = true -> i is composite
-vector<bool> lognSieve(int n) {
-    vector<bool> composite(n + 1);
-    for (ll i = 2; i * i < n + 1; i++)
-    {
-        if (!composite[i])
-        {
-            for (ll j = i * i; j <= n; j += i)
-                composite[j] = true;
+vector<char> lognSieve(int n) {
+    vector<char> composite(n + 1);
+    for (ll i = 2; i * i < n + 1; i++) {
+        if (!composite[i]) {
+            for (ll j = i * i; j <= n; j += i) composite[j] = true;
         }
     }
-
     return composite;
 }
 

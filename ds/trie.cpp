@@ -43,8 +43,7 @@ struct node
     node *right;
     int val; //size of subtree, including this node
 
-    node(int val)
-    {
+    node(int val) {
         this->left = nullptr;
         this->right = nullptr;
         this->val = val;
@@ -54,19 +53,14 @@ struct node
 void insert(node *u, string &b)
 {
     node *cur = u;
-    REP(i, 0, 32)
-    {
+    REP(i, 0, 32) {
         cur->val++;
-        if (b[i] == '0')
-        {
-            if (cur->left == nullptr)
-                cur->left = new node(0);
+        if (b[i] == '0') {
+            if (cur->left == nullptr) cur->left = new node(0);
             cur = cur->left;
         }
-        else
-        {
-            if (cur->right == nullptr)
-                cur->right = new node(0);
+        else {
+            if (cur->right == nullptr) cur->right = new node(0);
             cur = cur->right;
         }
     }
@@ -76,13 +70,10 @@ void insert(node *u, string &b)
 void remove(node *u, string &b)
 {
     node *cur = u;
-    REP(i, 0, 32)
-    {
+    REP(i, 0, 32) {
         cur->val--;
-        if (b[i] == '0')
-        {
-            if (cur->left->val == 1)
-            {
+        if (b[i] == '0') {
+            if (cur->left->val == 1) {
                 cur->left = nullptr;
                 return;
             }
@@ -90,8 +81,7 @@ void remove(node *u, string &b)
         }
         else
         {
-            if (cur->right->val == 1)
-            {
+            if (cur->right->val == 1) {
                 cur->right = nullptr;
                 return;
             }
@@ -105,30 +95,23 @@ int maxor(node *u, string &b)
 {
     string ans = "";
     node *cur = u;
-    REP(i, 0, 32)
-    {
-        if (b[i] == '1')
-        {
-            if (cur->left)
-            {
+    REP(i, 0, 32) {
+        if (b[i] == '1') {
+            if (cur->left) {
                 cur = cur->left;
                 ans += "1";
             }
-            else
-            {
+            else {
                 cur = cur->right;
                 ans += "0";
             }
         }
-        else
-        {
-            if (cur->right)
-            {
+        else {
+            if (cur->right) {
                 cur = cur->right;
                 ans += "1";
             }
-            else
-            {
+            else {
                 cur = cur->left;
                 ans += "0";
             }
@@ -148,6 +131,5 @@ int main()
     int t = 1;
     // cin >> t;
 
-    while (t--)
-        run();
+    while (t--) run();
 }
