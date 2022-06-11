@@ -28,18 +28,53 @@ typedef tuple<int, int, int> tiii;
 #define VECITR(itr, v) for (vit itr = v.begin(); itr != v.end(); itr++)
 #define PB push_back
 #define MP make_pair
+#define MT make_tuple
 #define F first
 #define S second
 #define sq(a) ((a) * (a))
 #define v(t) vector<t>
 #define all(v) v.begin(), v.end()
 
+// O(log(min(a, b)))
 ll gcd(ll a, ll b)
 {
-    if (b == 0)
-        return a;
+    if (b == 0) return a;
     return gcd(b, a % b);
 }
+
+// avoids integer overflow
+ll lcm (ll a, ll b) {
+    return a / gcd(a, b) * b;
+}
+
+// optimized gcd
+ll fast_gcd(ll a, ll b) {
+    if (!a || !b) return a | b;
+    unsigned shift = __builtin_ctzll(a | b);
+    a >>= __builtin_ctzll(a);
+    do {
+        b >>= __builtin_ctzll(b);
+        if (a > b) swap(a, b);
+        b -= a;
+    } while (b);
+    return a << shift;
+}
+
+// O(log(min(a, b)))
+// extended euclidean
+// solve for (x, y) in ax + by = gcd(a, b)
+// returns gcd(a, b), also solves for (x, y)
+ll extendedEuclidean(ll a, ll b, ll &x, ll &y) {
+    if (b == 0) {
+        tie(x, y) = MT(1, 0);
+        return a;
+    }
+    ll x1, y1;
+    ll g = extendedEuclidean(b, a % b, x1, y1);
+    tie(x, y) = MT(y1, x1 - (a / b) * y1);
+    return g;
+}
+
 
 string next_valid_bracket_sequence(const string &x)
 {
@@ -65,7 +100,7 @@ string next_valid_bracket_sequence(const string &x)
             }
         }
     }
-
+    
     return "";
 }
 
@@ -207,8 +242,10 @@ public:
     ll get(int i, int j) { return perm[i][j]; }
 };
 
+// O(n)
 // returns list of primes upto n (inclusive)
-// 32 times more memory than lognSieve
+// 32 times more memory than lognSieve,
+// worst time than lognSieve although better complexity
 vector<int> linearSieve(int n)
 {
     vi prime, lp(n + 1, 0);
@@ -225,7 +262,9 @@ vector<int> linearSieve(int n)
     return prime;
 }
 
-// vector<bool> takes 1/32 times the memory of vector<int>
+// O(n * log(log(n)))
+// vector<bool> takes 1/32 times the memory of linearSieve, but is slower
+// vector<char> takes 1/4 times the memory of linearSieve, but is fastest
 // returns boolean array of all numbers, ar[i] = true -> i is composite
 vector<char> lognSieve(int n) {
     vector<char> composite(n + 1);
@@ -255,8 +294,8 @@ int main()
 {
     cin.tie(NULL);
     ios_base::sync_with_stdio(false);
-    int t = 1;
-    cin >> t;
+    int t = 0;
+    // cin >> t;
 
     while (t--)
     {
