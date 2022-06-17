@@ -68,19 +68,15 @@ string next_valid_bracket_sequence(const string &x)
     int d = 0;
     for (int i = n - 1; i >= 1; i--)
     {
-        if (s[i] == ')')
-            d++;
-        else
-        {
+        if (s[i] == ')') d++;
+        else {
             d--;
-            if (d > 0)
-            {
+            if (d > 0) {
                 s[i] = ')';
                 s = s.substr(0, i + 1);
                 REP(j, 0, (n - i - d) / 2) { s += "("; }
                 REP(j, 0, (n - i + d - 2) / 2) { s += ")"; }
-                if (s.size() < n)
-                    return s + ")";
+                if (s.size() < n) return s + ")";
                 return s;
             }
         }
@@ -135,23 +131,18 @@ int numberOfDivisors(int n)
     int count = 1;
     vi arr;
     int i = 2;
-    while (i * i <= n)
-    {
-        if (n % i == 0)
-        {
+    while (i * i <= n) {
+        if (n % i == 0) {
             arr.PB(1);
-            while (n % i == 0)
-            {
+            while (n % i == 0) {
                 n /= i;
                 arr.back()++;
             }
         }
         i++;
     }
-    for (int x : arr)
-        count *= x;
-    if (n != 1)
-        count *= 2;
+    for (int x : arr) count *= x;
+    if (n != 1) count *= 2;
 
     return count;
 }
@@ -159,10 +150,8 @@ int numberOfDivisors(int n)
 bool isPalindrome(const string &s)
 {
     int n = s.size();
-    REP(i, 0, n / 2)
-    {
-        if (s[i] != s[n - i - 1])
-            return false;
+    REP(i, 0, n / 2) {
+        if (s[i] != s[n - i - 1]) return false;
     }
     return true;
 }
@@ -186,39 +175,29 @@ public:
     int n;
     int mod = -1;
 
-    allPerms(int n, int mod = -1)
-    {
+    allPerms(int n, int mod = -1) {
         this->mod = mod;
         this->n = n + 1;
         this->perm = vector<vector<ll>>(n + 1, vector<ll>(n + 1, 0));
         set();
     }
 
-    void set()
-    {
+    void set() {
         REP(i, 0, n) { perm[i][0] = 1; }
         // REP(i, 0, m) { perm[i][i] = 1; }
 
-        if (mod > -1)
-        {
-            REP(i, 0, n - 1)
-            {
-                REP(j, 0, i + 1)
-                {
-                    if (j > 0)
-                        perm[i + 1][j] = (perm[i + 1][j] + perm[i][j]) % mod;
+        if (mod > -1) {
+            REP(i, 0, n - 1) {
+                REP(j, 0, i + 1) {
+                    if (j > 0) perm[i + 1][j] = (perm[i + 1][j] + perm[i][j]) % mod;
                     perm[i + 1][j + 1] = (perm[i + 1][j + 1] + perm[i][j]) % mod;
                 }
             }
         }
-        else
-        {
-            REP(i, 0, n - 1)
-            {
-                REP(j, 0, i + 1)
-                {
-                    if (j > 0)
-                        perm[i + 1][j] += perm[i][j];
+        else {
+            REP(i, 0, n - 1) {
+                REP(j, 0, i + 1) {
+                    if (j > 0) perm[i + 1][j] += perm[i][j];
                     perm[i + 1][j + 1] += perm[i][j];
                 }
             }
