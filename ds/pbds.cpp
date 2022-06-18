@@ -84,12 +84,21 @@ void run()
     for (auto i : A)
         cout << i << " ";
     cout << endl;
+    
+    // size of A
+    cout << A.size() << endl;
 }
 
 int main()
 {
     cin.tie(NULL);
     ios_base::sync_with_stdio(false);
+
+#ifndef ONLINE_JUDGE
+    freopen("temp/input.txt", "r", stdin);
+    freopen("temp/output.txt", "w", stdout);
+#endif
+
     int t = 1;
     // cin >> t;
 
