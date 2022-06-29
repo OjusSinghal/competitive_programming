@@ -147,13 +147,9 @@ int numberOfDivisors(int n)
     return count;
 }
 
-bool isPalindrome(const string &s)
+bool is_palindrome(const string &s)
 {
-    int n = s.size();
-    REP(i, 0, n / 2) {
-        if (s[i] != s[n - i - 1]) return false;
-    }
-    return true;
+    return equal(s.begin(), s.begin() + s.size() / 2, s.rbegin());
 }
 
 ll nchoosek(ll n, ll k, ll mod)
@@ -167,46 +163,6 @@ ll nchoosek(ll n, ll k, ll mod)
         res = (res * i) % mod;
     return res;
 }
-
-class allPerms
-{
-public:
-    vector<vector<ll>> perm;
-    int n;
-    int mod = -1;
-
-    allPerms(int n, int mod = -1) {
-        this->mod = mod;
-        this->n = n + 1;
-        this->perm = vector<vector<ll>>(n + 1, vector<ll>(n + 1, 0));
-        set();
-    }
-
-    void set() {
-        REP(i, 0, n) { perm[i][0] = 1; }
-        // REP(i, 0, m) { perm[i][i] = 1; }
-
-        if (mod > -1) {
-            REP(i, 0, n - 1) {
-                REP(j, 0, i + 1) {
-                    if (j > 0) perm[i + 1][j] = (perm[i + 1][j] + perm[i][j]) % mod;
-                    perm[i + 1][j + 1] = (perm[i + 1][j + 1] + perm[i][j]) % mod;
-                }
-            }
-        }
-        else {
-            REP(i, 0, n - 1) {
-                REP(j, 0, i + 1) {
-                    if (j > 0) perm[i + 1][j] += perm[i][j];
-                    perm[i + 1][j + 1] += perm[i][j];
-                }
-            }
-        }
-    }
-
-public:
-    ll get(int i, int j) { return perm[i][j]; }
-};
 
 // O(n)
 // returns list of primes upto n (inclusive)
