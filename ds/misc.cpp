@@ -21,8 +21,7 @@ typedef tuple<int, int, int> tiii;
 #define all(v) v.begin(), v.end()
 
 // O(log(min(a, b)))
-ll gcd(ll a, ll b)
-{
+ll gcd(ll a, ll b) {
     if (b == 0) return a;
     return gcd(b, a % b);
 }
@@ -60,39 +59,12 @@ ll extendedEuclidean(ll a, ll b, ll &x, ll &y) {
     return g;
 }
 
-
-string next_valid_bracket_sequence(const string &x)
-{
-    string s = x;
-    int n = s.size();
-    int d = 0;
-    for (int i = n - 1; i >= 1; i--)
-    {
-        if (s[i] == ')') d++;
-        else {
-            d--;
-            if (d > 0) {
-                s[i] = ')';
-                s = s.substr(0, i + 1);
-                REP(j, 0, (n - i - d) / 2) { s += "("; }
-                REP(j, 0, (n - i + d - 2) / 2) { s += ")"; }
-                if (s.size() < n) return s + ")";
-                return s;
-            }
-        }
-    }
-    
-    return "";
-}
-
-ll modulo(ll x, ll m)
-{
+ll modulo(ll x, ll m) {
     ll r = x % m;
     return r < 0 ? r + m : r;
 }
 
-ll power(ll n, ll k)
-{
+ll power(ll n, ll k) {
     if (k == 0) return 1LL;
     ll ans = 1;
     while (k > 0) {
@@ -206,6 +178,41 @@ vector<pair<int, int>> allQuotients(int n)
     for (int i = 2; i <= n; i = (n / (n / i)) + 1)
         Q.PB({n / i, (n / (n / i)) - i + 1});
     return Q;
+}
+
+
+string next_valid_bracket_sequence(const string &x) {
+    string s = x;
+    int n = s.size();
+    int d = 0;
+    for (int i = n - 1; i >= 1; i--) {
+        if (s[i] == ')') d++;
+        else {
+            d--;
+            if (d > 0) {
+                s[i] = ')';
+                s = s.substr(0, i + 1);
+                REP(j, 0, (n - i - d) / 2) { s += "("; }
+                REP(j, 0, (n - i + d - 2) / 2) { s += ")"; }
+                if (s.size() < n) return s + ")";
+                return s;
+            }
+        }
+    }
+    
+    return "";
+}
+
+
+bool valid_bracket_sequence(const string &s) {
+    int n = s.size();
+    int b = 0;
+    for (char c : s) {
+        if (c == ')') b--;
+        else b++;
+        if (b < 0) return false;
+    }
+    return b == 0;
 }
 
 void run()
