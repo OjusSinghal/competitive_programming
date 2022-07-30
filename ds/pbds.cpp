@@ -81,8 +81,7 @@ void run()
 
     // A contains
     cout << "A = ";
-    for (auto i : A)
-        cout << i << " ";
+    for (auto i : A) cout << i << " ";
     cout << endl;
     
     // size of A

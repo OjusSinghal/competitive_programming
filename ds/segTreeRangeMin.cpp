@@ -21,8 +21,7 @@ typedef pair<int, int> pii;
 
 void build(const vi &arr, vi &tree, int lo, int hi, int i)
 {
-    if (hi == lo)
-    {
+    if (hi == lo) {
         tree[i] = arr[lo];
         return;
     }
@@ -34,26 +33,21 @@ void build(const vi &arr, vi &tree, int lo, int hi, int i)
 
 int mini(vi &tree, int lo, int hi, int l, int r, int i)
 {
-    if (lo >= l && hi <= r)
-        return tree[i];
-    if (hi < l || lo > r)
-        return INT32_MAX;
+    if (lo >= l && hi <= r) return tree[i];
+    if (hi < l || lo > r) return INT32_MAX;
     int mid = (lo + hi) / 2;
     return min(mini(tree, lo, mid, l, r, 2 * i + 1), mini(tree, mid + 1, hi, l, r, 2 * i + 2));
 }
 
 void update(vi &tree, int u, int val, int lo, int hi, int i)
 {
-    if (lo == hi)
-    {
+    if (lo == hi) {
         tree[i] = val;
         return;
     }
     int mid = (lo + hi) / 2;
-    if (u <= mid)
-        update(tree, u, val, lo, mid, 2 * i + 1);
-    else
-        update(tree, u, val, mid + 1, hi, 2 * i + 2);
+    if (u <= mid) update(tree, u, val, lo, mid, 2 * i + 1);
+    else update(tree, u, val, mid + 1, hi, 2 * i + 2);
     tree[i] = min(tree[(2 * i) + 2], tree[(2 * i) + 1]);
 }
 

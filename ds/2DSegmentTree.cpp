@@ -1,6 +1,6 @@
 // // //
 // Kind of inefficient (not the implementation, 2D segtrees in general)
-// workd by splitting the 2d segment
+// works by splitting the 2d segment
 // horizontally / vertically (whichever is suitable)
 // lox, loy <= hix, hiy
 // main function TLEs in the CSES problem Forests 2
@@ -33,8 +33,7 @@ vi tree;
 
 void build(int i, int loy, int lox, int hiy, int hix)
 {
-    if (loy == hiy && lox == hix)
-    {
+    if (loy == hiy && lox == hix) {
         tree[i] = (grid[loy][lox] == '*') ? 1 : 0;
         return;
     }
@@ -57,8 +56,7 @@ void build(int i, int loy, int lox, int hiy, int hix)
 
 void update(int i, int loy, int lox, int hiy, int hix, int ky, int kx)
 {
-    if (loy == hiy && lox == hix)
-    {
+    if (loy == hiy && lox == hix) {
         tree[i] = 1 - tree[i];
         return;
     }
@@ -67,37 +65,29 @@ void update(int i, int loy, int lox, int hiy, int hix, int ky, int kx)
 
     if (hix - lox >= hiy - loy)
     {
-        if (kx <= midx)
-            update(2 * i + 1, loy, lox, hiy, midx, ky, kx);
-        else
-            update(2 * i + 2, loy, midx + 1, hiy, hix, ky, kx);
+        if (kx <= midx) update(2 * i + 1, loy, lox, hiy, midx, ky, kx);
+        else update(2 * i + 2, loy, midx + 1, hiy, hix, ky, kx);
     }
     else
     {
-        if (ky <= midy)
-            update(2 * i + 1, loy, lox, midy, hix, ky, kx);
-        else
-            update(2 * i + 2, midy + 1, lox, hiy, hix, ky, kx);
+        if (ky <= midy) update(2 * i + 1, loy, lox, midy, hix, ky, kx);
+        else update(2 * i + 2, midy + 1, lox, hiy, hix, ky, kx);
     }
     tree[i] = tree[(2 * i + 1)] + tree[(2 * i + 2)];
 }
 
 int summ(int i, int loy, int lox, int hiy, int hix, int kloy, int klox, int khiy, int khix)
 {
-    if (kloy > hiy || klox > hix || khix < lox || khiy < loy)
-        return 0;
-    if (klox <= lox && kloy <= loy && khix >= hix && khiy >= hiy)
-        return tree[i];
+    if (kloy > hiy || klox > hix || khix < lox || khiy < loy) return 0;
+    if (klox <= lox && kloy <= loy && khix >= hix && khiy >= hiy) return tree[i];
     int midx = (hix + lox) / 2;
     int midy = (hiy + loy) / 2;
     int fc, sc;
-    if (hix - lox >= hiy - loy)
-    {
+    if (hix - lox >= hiy - loy) {
         fc = summ(2 * i + 1, loy, lox, hiy, midx, kloy, klox, khiy, khix);
         sc = summ(2 * i + 2, loy, midx + 1, hiy, hix, kloy, klox, khiy, khix);
     }
-    else
-    {
+    else {
         fc = summ(2 * i + 1, loy, lox, midy, hix, kloy, klox, khiy, khix);
         sc = summ(2 * i + 2, midy + 1, lox, hiy, hix, kloy, klox, khiy, khix);
     }
@@ -116,11 +106,8 @@ void run()
     {
         int quer;
         cin >> quer;
-        if (quer == 1)
-        {
-            int y, x;
-            cin >> y >> x;
-            y--, x--;
+        if (quer == 1) {
+            int y, x; cin >> y >> x; y--, x--;
             update(0, 0, 0, n - 1, n - 1, y, x);
         }
         else

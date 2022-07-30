@@ -33,18 +33,14 @@ void pushLazy(vi &lazy, vi &tree, int i)
 
 void updateRange(vi &lazy, vi &tree, int lo, int hi, int l, int r, int i, int addend)
 {
-    if (r < lo || l > hi)
-        return;
-    if (l <= lo && r >= hi)
-    {
+    if (r < lo || l > hi) return;
+    if (l <= lo && r >= hi) {
         tree[i] += addend;
         lazy[i] += addend;
     }
-    else
-    {
+    else {
         int mid = (lo + hi) / 2;
-        if (lazy[i] != 0)
-            pushLazy(lazy, tree, i);
+        if (lazy[i] != 0) pushLazy(lazy, tree, i);
         updateRange(lazy, tree, lo, mid, l, r, 2 * i + 1, addend);
         updateRange(lazy, tree, mid + 1, hi, l, r, 2 * i + 2, addend);
         tree[i] = min(tree[2 * i + 1], tree[2 * i + 2]);
@@ -53,10 +49,8 @@ void updateRange(vi &lazy, vi &tree, int lo, int hi, int l, int r, int i, int ad
 
 int mini(vi &lazy, vi &tree, int lo, int hi, int l, int r, int i)
 {
-    if (lo >= l && hi <= r)
-        return tree[i];
-    if (hi < l || lo > r)
-        return INT32_MAX;
+    if (lo >= l && hi <= r) return tree[i];
+    if (hi < l || lo > r) return INT32_MAX;
     pushLazy(lazy, tree, i);
     int mid = (lo + hi) / 2;
     return min(mini(lazy, tree, lo, mid, l, r, 2 * i + 1), mini(lazy, tree, mid + 1, hi, l, r, 2 * i + 2));
